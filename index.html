@@ -267,16 +267,7 @@
             right: 20px; 
         }
         .cstagent {
-            position: fixed;
-            bottom: calc(30px); 
-            left: 20px;
-            width: 150px; 
-            height: auto;
-            z-index: 3;
-            transition: transform 4s ease; 
-        }
-        .cstagent:hover {
-            transform: scale(1.5);
+            display: none; 
         }
     </style>
 </head>
@@ -309,10 +300,6 @@
 
         </p>
     </div>
-
-    <img src="ctagent.png" alt="CST Agent" class="cstagent" id="cstagent">
-    <audio id="hover-sound" src="vl1.mp3"></audio>
-
     <div class="footer">BobTonyTeam ©</div>
     <audio id="bg-music" src="bgmusik.mp3" loop></audio>
     <script>
@@ -341,14 +328,6 @@
             event.preventDefault();
             document.getElementById('widget').classList.toggle('show');
         });
-
-        const cstagent = document.getElementById('cstagent');
-        const hoverSound = document.getElementById('hover-sound');
-
-        cstagent.addEventListener('mouseover', () => {
-            hoverSound.play();
-        });
-
         function accept() {
             document.getElementById('overlay').style.display = 'none';
         }
