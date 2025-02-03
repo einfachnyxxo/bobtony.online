@@ -314,12 +314,10 @@
             transform: translateY(-50%);
             transition: right 0.5s ease;
             z-index: 3;
-        }
-        .widget p {
-            margin: 0;
-            font-size: 14px;
+            display: none; /* Hide initially */
         }
         .widget.show {
+            display: block; /* Show when toggled */
             right: 20px; 
         }
         .cstagent {
@@ -383,7 +381,7 @@
       
     </div>
 
-    <div id="widget" class="widget fade-in">
+    <div id="widget" class="widget">
         <p>Websitenihnaber Breluxe
             Majakowski Straße 50
 
