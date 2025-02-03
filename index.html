@@ -11,7 +11,7 @@
         body {
             font-family: "Press Start 2P";
             background-color: black;
-            overflow: hidden;
+            overflow: hidden; 
             position: relative;
             display: flex;
             flex-direction: column;
@@ -42,7 +42,7 @@
         }
         @keyframes starAnimation {
             0% {
-                transform: translateY(100vh); /* Start from the bottom */
+                transform: translateY(100vh); 
                 background: white;
                 opacity: 1;
             }
@@ -51,7 +51,7 @@
                 opacity: 1;
             }
             100% {
-                transform: translateY(-200vh); /* Move straight up */
+                transform: translateY(-200vh); 
                 background: #6f00ff; 
                 opacity: 1;
             }
@@ -278,7 +278,7 @@
             const star = document.createElement('div');
             star.classList.add('star');
             star.style.left = `${Math.random() * 100}%`;
-            star.style.top = `${Math.random() * 100 + 100}%`; // Start from below the screen
+            star.style.top = `${Math.random() * 100 + 100}%`; 
             star.style.animationDuration = `${Math.random() * 20 + 10}s`; 
             star.style.animationDelay = `${Math.random() * 5}s`; 
             starContainer.appendChild(star);
