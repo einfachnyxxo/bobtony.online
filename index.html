@@ -224,7 +224,10 @@
             align-items: center;
             color: #b19cd9;
             text-shadow: 0 0 20px rgb(255, 255, 255);
-            z-index: 2; 
+            z-index: 2;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
         .stars {
             position: absolute;
@@ -257,7 +260,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 3;
+            z-index: 4;
         }
         .overlay-content {
             background: white;
@@ -265,7 +268,7 @@
             text-align: center;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(111, 0, 255, 0.5);
-            z-index: 4;
+            z-index: 5; 
         }
         .overlay-content p {
             margin-bottom: 20px;
@@ -346,6 +349,15 @@
             animation: gradientAnimationHeader 8s ease infinite, twitch 0.1s infinite, lightning 1s infinite;
             box-shadow: 0 6px 15px rgba(111, 0, 255, 0.7);
         }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -358,7 +370,7 @@
         </div>
     </div>
 
-    <nav class="navbar">
+    <nav class="navbar fade-in">
         <span class="brand" onclick="location.reload()">BobTony.Online</span>
         <ul class="nav-links">
             <li><a href="https://github.com/Flytzer/BobTonyMod">GitHub</a></li>
@@ -367,19 +379,20 @@
         </ul>        
     </nav>
 
-    <div class="stars">
+    <div class="stars fade-in">
       
     </div>
 
-    <div id="widget" class="widget">
+    <div id="widget" class="widget fade-in">
         <p>Websitenihnaber Breluxe
             Majakowski Straße 50
 
         </p>
     </div>
-    <div class="footer">BobTonyTeam ©</div>
+    <div class="footer fade-in">BobTonyTeam ©</div>
     <audio id="bg-music" src="bgmusik.mp3" loop></audio>
-    <button class="download-button">Download</button>
+    <button class="download-button fade-in">Download</button>
+
     <script>
         console.log("Website geladen");
 
@@ -409,6 +422,11 @@
         function accept() {
             document.getElementById('overlay').style.display = 'none';
             document.querySelector('.download-button').style.display = 'block'; 
+            document.querySelectorAll('.fade-in').forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('show'); 
+                }, index * 500); 
+            });
         }
 
         function decline() {
