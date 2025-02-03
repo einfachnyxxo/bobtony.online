@@ -120,6 +120,56 @@
                 transform: scale(1);
             }
         }
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        @keyframes hoverEffect {
+            0% {
+                transform: translate(-50%, -50%) scale(1.1) rotate(0deg);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.15) rotate(5deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.1) rotate(0deg);
+            }
+        }
+        @keyframes twitch {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1.1) rotate(0deg);
+            }
+            25% {
+                transform: translate(-50%, -50%) scale(1.1) rotate(1deg);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1) rotate(-1deg);
+            }
+            75% {
+                transform: translate(-50%, -50%) scale(1.1) rotate(0.5deg);
+            }
+        }
+        @keyframes lightning {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3), 0 0 30px rgba(255, 255, 255, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3);
+            }
+        }
+        @keyframes flyToButton {
+            to {
+                transform: translate(calc(50vw - 50%), calc(50vh - 50%)) scale(0);
+                opacity: 0;
+            }
+        }
         * {
             margin: 0;
             padding: 0;
@@ -193,6 +243,9 @@
             border-radius: 50%; 
             opacity: 1; 
             animation: starAnimation 30s linear infinite; 
+        }
+        .star.fly-to-button {
+            animation: flyToButton 1s forwards;
         }
         .overlay {
             position: fixed;
@@ -269,6 +322,30 @@
         .cstagent {
             display: none; 
         }
+        .download-button {
+            display: none; 
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px 60px; 
+            background: linear-gradient(270deg, black, #170031);
+            background-size: 400% 400%;
+            animation: gradientAnimationHeader 8s ease infinite, pulse 2s infinite;
+            color: #b19cd9;
+            font-family: "Press Start 2P";
+            font-size: 24px; 
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(111, 0, 255, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 3;
+        }
+        .download-button:hover {
+            animation: gradientAnimationHeader 8s ease infinite, twitch 0.1s infinite, lightning 1s infinite;
+            box-shadow: 0 6px 15px rgba(111, 0, 255, 0.7);
+        }
     </style>
 </head>
 <body>
@@ -302,6 +379,7 @@
     </div>
     <div class="footer">BobTonyTeam ©</div>
     <audio id="bg-music" src="bgmusik.mp3" loop></audio>
+    <button class="download-button">Download</button>
     <script>
         console.log("Website geladen");
 
@@ -330,11 +408,34 @@
         });
         function accept() {
             document.getElementById('overlay').style.display = 'none';
+            document.querySelector('.download-button').style.display = 'block'; 
         }
 
         function decline() {
             window.close();
         }
+
+        document.querySelector('.download-button').addEventListener('click', () => {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                const rect = star.getBoundingClientRect();
+                const buttonRect = document.querySelector('.download-button').getBoundingClientRect();
+                const deltaX = buttonRect.left + buttonRect.width / 2 - (rect.left + rect.width / 2);
+                const deltaY = buttonRect.top + buttonRect.height / 2 - (rect.top + rect.height / 2);
+                star.style.transition = 'transform 1s, opacity 1s';
+                star.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0)`;
+                star.style.opacity = '0';
+            });
+        });
+        
+        window.addEventListener('load', () => {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.style.transition = 'none';
+                star.style.transform = 'none';
+                star.style.opacity = '1';
+            });
+        });
     </script>
 </body>
 </html>
