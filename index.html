@@ -242,6 +242,30 @@
         .overlay-content a:hover {
             animation: hoverPurple 1s infinite;
         }
+        .widget {
+            position: fixed;
+            top: 50%;
+            right: -300px; 
+            width: 250px;
+            padding: 20px;
+            background: linear-gradient(270deg, #6f00ff, #3d0181, #170031, #000000);
+            background-size: 400% 400%;
+            animation: gradientAnimationHeader 8s ease infinite;
+            color: #b19cd9;
+            box-shadow: 0 4px 10px rgba(111, 0, 255, 0.5);
+            border-radius: 10px;
+            text-align: center;
+            transform: translateY(-50%);
+            transition: right 0.5s ease;
+            z-index: 3;
+        }
+        .widget p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .widget.show {
+            right: 20px; 
+        }
     </style>
 </head>
 <body>
@@ -267,6 +291,10 @@
       
     </div>
 
+    <div id="widget" class="widget">
+        <p>Webstite von Breluxe</p>
+    </div>
+
     <div class="footer">BobTonyTeam ©</div>
     <audio id="bg-music" src="bgmusik.mp3" loop></audio>
     <script>
@@ -289,6 +317,11 @@
         bgMusic.volume = 0.1; 
         document.body.addEventListener('click', () => {
             bgMusic.play();
+        });
+
+        document.querySelector('.nav-links a[href="impressum.html"]').addEventListener('click', (event) => {
+            event.preventDefault();
+            document.getElementById('widget').classList.toggle('show');
         });
 
         function accept() {
