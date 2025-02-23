@@ -1,4 +1,0 @@
-echo "bobtony.dev", "bobtony.online" > CNAME
-git add -A
-git commit -m “Added CNAME file.”
-git push origin master

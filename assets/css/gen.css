@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'minecraft';
+    src: url('fonts/minecraft.ttf') format('truetype');
+    font-weight: 1 1000;
+}
+
+:root {
+    --background: #060606;
+    --text: #ffffff;
+    --text-secondary: #b6b6b6;
+    --highlight: #6F00FF;
+    --highlight-secondary: #200049;
+    --bg-secondary: #00000007;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --secondary: #141414;
+}
+
+.highlight{
+    color: var(--highlight);
+}
+
+.highlight span{
+    color: var(--highlight-secondary);
+}

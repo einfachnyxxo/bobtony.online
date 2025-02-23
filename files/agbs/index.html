@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGB Version</title>
+    <link rel="stylesheet" href="../../assets/css/docs.css">
+</head>
+<body>
+    <h1>AGB Version</h1>
+    <div id="agbContainer">Lade AGBs...</div>
+
+    <script src="../../assets/assets.js"></script>
+
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const version = getQueryParam('version');
+        if (version) {
+            const agbFilePath = `/files/agbs/${version}.md`;
+            console.log(`Lade AGBs aus: ${agbFilePath}`);
+
+            fetch(agbFilePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Fehler beim Laden der AGBs");
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    const htmlOutput = markdownToHtml(data);
+                    document.getElementById('agbContainer').innerHTML = htmlOutput;
+                })
+                .catch(error => {
+                    console.error("Fehler:", error);
+                    document.getElementById('agbContainer').textContent = "Fehler beim Laden der AGBs.";
+                });
+        } else {
+            document.getElementById('agbContainer').textContent = "Keine Version angegeben.";
+        }
+    </script>
+</body>
+</html>
